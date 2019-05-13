@@ -44,6 +44,7 @@
   <!-- <button class="btn btn-success js-show-image-form">add image</button>-->
 	<div class="row">
   {{#each images}}
+  <!-- unique id attribute is to use with jQuery to slow how fast an image is deleted -->
   <div class="col-xs-12 col-md-3" id="{{_id}}">
   	<div class="thumbnail">
   	 	<img class="js-image" src="{{img_src}}" 
@@ -51,6 +52,10 @@
       <div class="caption">
         <h3>Thumbnail Label</h3>
         <p>description of the image</p>
+        <!-- add stars for users to rate their pictures. Used barbatus:stars-rating -->
+        <p>
+          {{>starsRating mutable=true}}
+        </p>
         <button class="js-del-image btn btn-warning">delete</button>
       </div>
   			
