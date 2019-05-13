@@ -3,20 +3,21 @@ console.log("image-share.js says: "+Images.find().count());
 
 
 if (Meteor.isClient) {
-  var img_data = [
-    {
-      img_src: "laptops.jpg",
-      img_alt: "laptops on a table"
-    },
-    {
-      img_src: "img_1.jpg",
-      img_alt: "image1"
-     },
-    {
-      img_src: "img_2.jpg",
-      img_alt: "image2"
-    },
-  ];
+  // var img_data = 
+  // var img_data = [
+  //   {
+  //     img_src: "laptops.jpg",
+  //     img_alt: "laptops on a table"
+  //   },
+  //   {
+  //     img_src: "img_1.jpg",
+  //     img_alt: "image1"
+  //    },
+  //   {
+  //     img_src: "img_2.jpg",
+  //     img_alt: "image2"
+  //   },
+  // ];
   // pass the array above to the template.images.helper function i.e. bind some data onto the template
   // Template.images.helpers({images: img_data}); //template.images here is the same images name we have in the html file
   // Pass whatever comes back from the DB when we query with .find()
