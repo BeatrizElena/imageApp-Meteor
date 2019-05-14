@@ -13,26 +13,29 @@ if (Meteor.isClient) {
       // get and store the mongo id for each image
        var image_id = this._id;
        console.log(image_id);
-      //  Add a mongo filter {"_id":image_id} to delete anything that matches that filter
-      //  Images.remove({"_id":image_id});
-  //      // use jquery to hide the image component
-  //      // then remove it at the end of the animation
+        
+        // use jquery to hide the image component
+        // then remove it at the end of the animation
+        //  Add a mongo filter {"_id":image_id} to delete anything that matches that filter 
        $("#"+image_id).hide('slow', function(){
         Images.remove({"_id":image_id});
        })  
     }, 
-  //   'click .js-rate-image':function(event){
-  //     var rating = $(event.currentTarget).data("userrating");
-  //     console.log(rating);
-  //     var image_id = this.id;
-  //     console.log(image_id);
+    'click .js-rate-image':function(event){
+      // find out which star user clicked on
+      var rating = $(event.currentTarget).data("userrating");
+      console.log("My rating is: "+rating);
+      // find out which image is being rated
+      var image_id = this.id;
+      console.log("The image ID is: "+image_id);
 
-  //     Images.update({_id:image_id}, 
-  //                   {$set: {rating:rating}});
-  //   }, 
-  //   'click .js-show-image-form':function(event){
-  //     $("#image_add_form").modal('show');
-  //   }
+      // pass the rating to the db and store it
+      // the db function .update takes 2 arguments
+      Images.update({_id:image_id}, {$set: {rating:rating}});
+    }, 
+    'click .js-show-image-form':function(event){
+      $("#image_add_form").modal('show');
+    }
 
    });
 
