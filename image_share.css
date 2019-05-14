@@ -3,8 +3,11 @@ body {
   font-family: sans-serif;
 }
 .thumbnail {
-  min-height:500px;
   max-height:500px;
-
 }
-
+.thumbnail-img {
+  max-height:200px;
+}
+p {
+  max-width: 90%;
+}
