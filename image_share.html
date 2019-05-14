@@ -6,11 +6,16 @@
   <!-- Render image add form from the template below -->
 {{> image_add_form}}
 
+<nav class="navbar navbar-default navbar-fixed-top">
   <div class="container">
-    <h1>Choose your Favorite Pics!</h1>
     <!-- access login form & buttons provided by accounts-ui package. -->
     {{> loginButtons}}
-    <br>
+  </div>
+  
+</nav>
+
+  <div class="container">
+    <h1>Choose your Favorite Pics!</h1>
     <!-- Render images from the template below -->
     <!-- this 'images'name is the same passed to the template in the .js file} -->
     {{> images}} 
