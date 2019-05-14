@@ -15,15 +15,8 @@
 </body>
 
 <template name="image_add_form">
-  <form class="js-add-image">
-    <input type="text" name="img_src">
-    <br>
-    <input type="text" name="img_alt">
-    <br>
-    <button class="btn btn-success">save</button>
-  </form>
 
-<!-- <div class="modal fade" id="image_add_form">
+<div class="modal fade" id="image_add_form">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -43,7 +36,7 @@
       </div>
     </div>
 
-</div>-->
+</div>
 
   </template> 
 
@@ -51,7 +44,7 @@
   <!-- {{#each images}} -->
   <!-- <img src="{{img_src}}" alt="{{img_alt}}"/> -->
   <!-- {{/each images}} -->
-  <!-- <button class="btn btn-success js-show-image-form">add image</button>-->
+  <button class="btn btn-success js-show-image-form">add image</button>
 	<div class="row">
   {{#each images}}
   <!-- unique id attribute is to use with jQuery to slow how fast an image is deleted -->
