@@ -2,8 +2,12 @@ Images = new Mongo.Collection("images");
 
 
 if (Meteor.isClient) {
-  Template.images.helpers({images: Images.find()}); //template.images here is the same images name we have in the html file
-
+  //template.images here is the same images name we have in the html file
+  // After adding rating feature, add ability to sort by highest rating
+  // Empty bracket means: find everything
+  // rating:-1 means sort from highest to lowest
+  Template.images.helpers({images: Images.find({}, {sort:{rating:-1}})
+  }); 
 
    Template.images.events({
     'click .js-image':function(event){
@@ -23,6 +27,8 @@ if (Meteor.isClient) {
     }, 
     'click .js-rate-image':function(event){
       // find out which star user clicked on
+      // with the package we're using, we need to access event.currentTarget
+      // instead of event.target to get access to the db
       var rating = $(event.currentTarget).data("userrating");
       console.log("My rating is: "+rating);
       // find out which image is being rated
