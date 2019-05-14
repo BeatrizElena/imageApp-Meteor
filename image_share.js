@@ -6,7 +6,7 @@ if (Meteor.isClient) {
   // After adding rating feature, add ability to sort by highest rating
   // Empty bracket means: find everything
   // rating:-1 means sort from highest to lowest
-  Template.images.helpers({images: Images.find({}, {sort:{rating:-1}})
+  Template.images.helpers({images: Images.find({}, {sort:{createdOn:-1, rating:-1}})
   }); 
 
    Template.images.events({
@@ -45,20 +45,21 @@ if (Meteor.isClient) {
 
    });
 
-  // Template.image_add_form.events({
-  //   'submit .js-add-image':function(event){
-  //     var img_src, img_alt;
-  //     img_src = event.target.img_src.value;
-  //     img_alt = event.target.img_alt.value;
-  //     console.log("src: "+img_src+" alt:"+img_alt);
+  Template.image_add_form.events({
+    'submit .js-add-image':function(event){
+      var img_src, img_alt;
+      img_src = event.target.img_src.value;
+      img_alt = event.target.img_alt.value;
+      console.log("src: "+img_src+" alt:"+img_alt);
 
-  //     Images.insert({
-  //       img_src:img_src, 
-  //       img_alt:img_alt, 
-  //       createdOn:new Date()
-  //     });
+      // Add image being submitted to the db
+      Images.insert({
+        img_src:img_src, 
+        img_alt:img_alt, 
+        createdOn:new Date()
+      });
   //      $("#image_add_form").modal('show');
-  //     return false;
-  //   }
-  // });
+      return false;
+    }
+  });
 }
