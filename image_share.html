@@ -3,17 +3,27 @@
 </head>
 
 <body>
-<!-- {{> image_add_form}} -->
+  <!-- Render image add form from the template below -->
+{{> image_add_form}}
 
-  <!-- <h1>Welcome to coursera!</h1> -->
+  <h1>Choose your Favorite Pics!</h1>
   <!-- <div class="container"> -->
-  {{> images}} <!-- this 'images'name is the same passed to the template in the .js file} -->
+    <!-- Render images from the template below -->
+    <!-- this 'images'name is the same passed to the template in the .js file} -->
+  {{> images}} 
 <!-- </div> -->
 </body>
 
-<!-- <template name="image_add_form">
+<template name="image_add_form">
+  <form class="js-add-image">
+    <input type="text" name="img_src">
+    <br>
+    <input type="text" name="img_alt">
+    <br>
+    <button class="btn btn-success">save</button>
+  </form>
 
-<div class="modal fade" id="image_add_form">
+<!-- <div class="modal fade" id="image_add_form">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
