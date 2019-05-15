@@ -2,6 +2,15 @@ Images = new Mongo.Collection("images");
 
 
 if (Meteor.isClient) {
+  // Add scroll event to set infinite scroll
+  // Limit numbers of images ("imageLimit" is then used as a parameter to Images.find() below)
+  Session.set("imageLimit", 8);
+  // Meteor doesn't have a good way of doing infinite scroll, so use jQuery
+  $(window).scroll(function(event){
+    console.log(new Date());
+    
+  });
+
   // Modify signup field form to include a username
   Accounts.ui.config({
     passwordSignupFields: "USERNAME_AND_EMAIL"
@@ -18,7 +27,7 @@ if (Meteor.isClient) {
         return Images.find({createdBy:Session.get("userFilter")}, {sort:{createdOn:-1, rating:-1}});
         }
         else{
-          return Images.find({}, {sort:{createdOn:-1, rating:-1}});
+          return Images.find({}, {sort:{createdOn:-1, rating:-1}, limit:Session.get("imageLimit")});
         }
       },
       filtering_images:function(){
