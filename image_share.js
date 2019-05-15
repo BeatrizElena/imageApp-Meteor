@@ -5,10 +5,15 @@ if (Meteor.isClient) {
   // Add scroll event to set infinite scroll
   // Limit numbers of images ("imageLimit" is then used as a parameter to Images.find() below)
   Session.set("imageLimit", 8);
+  // Set var to help us track if user's scroll is near bottom of window
+  lastScrollTop = 0;
+
   // Meteor doesn't have a good way of doing infinite scroll, so use jQuery
   $(window).scroll(function(event){
+    // test if we are near the bottom of the window
+    if($(window).scrollTop() + $(window).height() > $(document).height()- 100){
     console.log(new Date());
-    
+    }
   });
 
   // Modify signup field form to include a username
