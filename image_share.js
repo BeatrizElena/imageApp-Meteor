@@ -12,7 +12,15 @@ if (Meteor.isClient) {
   $(window).scroll(function(event){
     // test if we are near the bottom of the window
     if($(window).scrollTop() + $(window).height() > $(document).height()- 100){
-    console.log(new Date());
+      // find out where we are in the page
+      var scrollTop = $(this).scrollTop();
+      // test if we are scrolling down
+      if(scrollTop > lastScrollTop) {
+        // yes, we're heading down to the bottom of the page ...
+        // so load 4 more images
+        Session.set("imageLimit", Session.get("imageLimit") + 4);
+      }
+      lastScrollTop = scrollTop;
     }
   });
 
