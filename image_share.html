@@ -48,7 +48,10 @@
 </template> 
 
 <template name="images">
+  <!-- show 'add image' button to logged in user only -->
+  {{#if currentUser}}
   <button class="btn btn-success js-show-image-form">add image</button>
+  {{/if}}
 	<div class="row">
   {{#each images}}
   <!-- unique id attribute is to use with jQuery to slow how fast an image is deleted -->
