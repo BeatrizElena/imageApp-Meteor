@@ -64,12 +64,16 @@ if (Meteor.isClient) {
       img_alt = event.target.img_alt.value;
       console.log("src: "+img_src+" alt:"+img_alt);
 
-      // Add image being submitted to the db
-      Images.insert({
-        img_src:img_src, 
-        img_alt:img_alt, 
-        createdOn:new Date()
-      });
+      // Add image being submitted to the db, if user is signed in
+      // Attach username to the image submitted by the user
+      if (Meteor.user()){
+        Images.insert({
+          img_src:img_src, 
+          img_alt:img_alt, 
+          createdOn:new Date(),
+          createdBy:Meteor.user()._id
+        });
+      }
       // dismiss the modal
        $("#image_add_form").modal('show');
       return false;
