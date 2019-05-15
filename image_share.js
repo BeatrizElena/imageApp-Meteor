@@ -2,6 +2,10 @@ Images = new Mongo.Collection("images");
 
 
 if (Meteor.isClient) {
+  // Modify signup field form to include a username
+  Accounts.ui.config({
+    passwordSignupFields: "USERNAME_AND_EMAIL"
+  });
   //template.images here is the same images name we have in the html file
   // After adding rating feature, add ability to sort by highest rating
   // Empty bracket means: find everything
@@ -10,7 +14,7 @@ if (Meteor.isClient) {
   });
   Template.body.helpers({username:function(){
     if(Meteor.user()){
-      return Meteor.user().emails[0].address
+      return Meteor.user().username
     }
     else {
       return "anonymous internet user!"
