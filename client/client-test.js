@@ -1,8 +1,4 @@
-Images = new Mongo.Collection("images");
-
-
-if (Meteor.isClient) {
-  // Add scroll event to set infinite scroll
+// Add scroll event to set infinite scroll
   // Limit numbers of images ("imageLimit" is then used as a parameter to Images.find() below)
   Session.set("imageLimit", 8);
   // Set var to help us track if user's scroll is near bottom of window
@@ -145,4 +141,3 @@ if (Meteor.isClient) {
       return false;
     }
   });
-}
