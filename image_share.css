@@ -9,5 +9,8 @@ body {
   max-height:200px;
 }
 p {
-  max-width: 90%;
+  max-width: 95%;
+}
+.break-text{
+  word-wrap: break-word;
 }
