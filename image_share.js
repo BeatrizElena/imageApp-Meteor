@@ -10,7 +10,34 @@ if (Meteor.isClient) {
   // After adding rating feature, add ability to sort by highest rating
   // Empty bracket means: find everything
   // rating:-1 means sort from highest to lowest
-  Template.images.helpers({images: Images.find({}, {sort:{createdOn:-1, rating:-1}})
+  Template.images.helpers({
+    images:function(){
+      if(Session.get("userFilter")){
+        // if user set a filter, change which image is sent back
+        // createdBy:Session.get("userFilter") is a Mongo filter
+        return Images.find({createdBy:Session.get("userFilter")}, {sort:{createdOn:-1, rating:-1}});
+        }
+        else{
+          return Images.find({}, {sort:{createdOn:-1, rating:-1}});
+        }
+      },
+      filtering_images:function(){
+        if(Session.get("userFilter")){
+          return true;
+        }
+        else{
+          return false;
+        }
+      },
+    getUser:function(user_id){
+      var user = Meteor.users.findOne({_id:user_id});
+      if(user){
+        return user.username;
+      }
+      else {
+        return "anon"
+      }
+    }
   });
   Template.body.helpers({username:function(){
     if(Meteor.user()){
@@ -53,8 +80,15 @@ if (Meteor.isClient) {
     }, 
     'click .js-show-image-form':function(event){
       $("#image_add_form").modal('show');
+    },
+    // when user clicks on createdBy, only images by the user clicked are shown
+    'click .js-set-image-filter':function(event){
+      Session.set('userFilter', this.createdBy);
+    },
+    // when user wants to clear her filter
+    'click .js-unset-image-filter':function(event){
+      Session.set('userFilter', undefined);
     }
-
    });
 
   Template.image_add_form.events({
