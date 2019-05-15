@@ -29,6 +29,16 @@ if (Meteor.isClient) {
           return false;
         }
       },
+    getFilteredUser:function(){
+      if(Session.get("userFilter")){
+        var user = Meteor.users.findOne(
+          {_id:Session.get("userFilter")});
+        return user.username;
+      }
+      else {
+        return false;
+      }
+    },
     getUser:function(user_id){
       var user = Meteor.users.findOne({_id:user_id});
       if(user){

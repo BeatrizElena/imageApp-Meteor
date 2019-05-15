@@ -52,11 +52,11 @@
   {{#if currentUser}}
   <button class="btn btn-success js-show-image-form">add image</button>
   {{/if}}
-  <h2>
+  <h3>
     {{#if filtering_images}}
-      Images are filtered. <a href="#" class="js-unset-image-filter">remove filter</a>
+      Showing images by user {{getFilteredUser}}. <a href="#" class="js-unset-image-filter"> Show all images</a>
     {{/if}}
-  </h2>
+  </h3>
 	<div class="row">
   {{#each images}}
   <!-- unique id attribute is to use with jQuery to slow how fast an image is deleted -->
