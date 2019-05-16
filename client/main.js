@@ -1,3 +1,8 @@
+// routing
+Router.route('/', function () {
+  this.render('navbar');
+});
+
 // Add scroll event to set infinite scroll
   // Limit numbers of images ("imageLimit" is then used as a parameter to Images.find() below)
   Session.set("imageLimit", 8);
