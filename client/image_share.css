@@ -17,3 +17,6 @@ p {
 .small {
   text-size-adjust: 75%;
 }
+.single-img {
+  max-width: 100%;
+}

@@ -1,6 +1,43 @@
 // routing
+// configure master layout for templates (send config options to the router system and 
+// telling it what default template I'm using, i.e. ApplicationLayout)
+// ApplicationLayout is like a super-template into which I can create other templates, i.e.
+// it's one global layout from which I can swap out the components.
+// The global template, in the html file, is: <template name="ApplicationLayout"></template>
+// Inside the global template, points are created. Ex: {{> yield "navbar"}}
+Router.configure({
+  layoutTemplate: 'ApplicationLayout'
+});
+
+// this.render function takes 2 arguments: the 1st renders the "welcome" template, 
+// the 2nd argument tells it to render it onto "main"
 Router.route('/', function () {
-  this.render('navbar');
+  this.render('welcome', {
+    to:"main"
+  });
+});
+
+Router.route('/images', function() {
+  this.render('navbar', {
+    to:"navbar"
+  });
+  this.render('images',{
+    to:"main"
+  });
+});
+
+Router.route('/image/:_id', function() {
+  this.render('navbar', {
+    to:"navbar"
+  });
+  // "this.params" refers to: for this particular route, what are the parameters that have come in
+  // in this case, we have parameter, the _id of the image
+  this.render('image', {
+    to:"main",
+    data:function(){
+      return Images.findOne({_id:this.params._id});
+    }
+  });
 });
 
 // Add scroll event to set infinite scroll
