@@ -3,11 +3,7 @@
 </head>
 
 <body>
-  <!-- Render image add form from the template below -->
-  <!-- {{> image_add_form}} -->
-    <!-- Render images from the template below -->
-    <!-- this 'images'name is the same passed to the template in the .js file} -->
-    <!-- {{> images}}  -->
+  <!--All body content is rendered through template "ApplicationLayout" -->
 </body>
 
 <template name="ApplicationLayout">
@@ -25,10 +21,10 @@
 </template>
 
 <!-- template to display full image -->
-<!-- full image is a link that takes user back to all images -->
 <template name="image">
   <div class="container">
   <h3>{{img_alt}}</h3>
+  <!-- add link to take user back to /images -->
   <a href="/images"><img class="single-img" src="{{img_src}}"/></a>
 </div>
 </template>
@@ -84,7 +80,6 @@
   <div class="col-xs-12 col-md-3" id="{{_id}}">
   	<div class="thumbnail">
       <!-- Add link to take user to full size image of the thumbnail -->
-      <!-- Full-size image comes from Mongo dropping in the image's _id -->
   	 	<a href="/image/{{_id}}"><img class="js-image thumbnail-img" src="{{img_src}}" 
       alt="{{img_alt}}" /></a>
       <div class="caption">
@@ -92,8 +87,7 @@
         <p class="small">{{img_alt}}</p>
         <p>User: <a href="#" class="js-set-image-filter">{{getUser createdBy}}</a></p>
         <p class="small">Added on: <br>{{createdOn}}</p>
-        <!-- add stars for users to rate their pictures. Package used: barbatus:stars-rating -->
-        <!-- find out which image is being rated: id=_id -->
+        <!-- add stars for users to rate their pictures. -->
         <p>
           {{>starsRating mutable=true class="js-rate-image" id=_id}}
         </p>

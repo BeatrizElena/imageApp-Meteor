@@ -1,16 +1,10 @@
 // routing
-// configure master layout for templates (send config options to the router system and 
-// telling it what default template I'm using, i.e. ApplicationLayout)
-// ApplicationLayout is like a super-template into which I can create other templates, i.e.
-// it's one global layout from which I can swap out the components.
-// The global template, in the html file, is: <template name="ApplicationLayout"></template>
-// Inside the global template, points are created. Ex: {{> yield "navbar"}}
+// configure master layout for templates
 Router.configure({
   layoutTemplate: 'ApplicationLayout'
 });
 
-// this.render function takes 2 arguments: the 1st renders the "welcome" template, 
-// the 2nd argument tells it to render it onto "main"
+// render separate routes
 Router.route('/', function () {
   this.render('welcome', {
     to:"main"
@@ -30,8 +24,6 @@ Router.route('/image/:_id', function() {
   this.render('navbar', {
     to:"navbar"
   });
-  // "this.params" refers to: for this particular route, what are the parameters that have come in
-  // in this case, we have parameter, the _id of the image
   this.render('image', {
     to:"main",
     data:function(){
@@ -41,12 +33,10 @@ Router.route('/image/:_id', function() {
 });
 
 // Add scroll event to set infinite scroll
-  // Limit numbers of images ("imageLimit" is then used as a parameter to Images.find() below)
   Session.set("imageLimit", 8);
   // Set var to help us track if user's scroll is near bottom of window
   lastScrollTop = 0;
 
-  // Meteor doesn't have a good way of doing infinite scroll, so use jQuery
   $(window).scroll(function(event){
     // test if we are near the bottom of the window
     if($(window).scrollTop() + $(window).height() > $(document).height()- 100){
@@ -66,15 +56,11 @@ Router.route('/image/:_id', function() {
   Accounts.ui.config({
     passwordSignupFields: "USERNAME_AND_EMAIL"
   });
-  //template.images here is the same images name we have in the html file
   // After adding rating feature, add ability to sort by highest rating
-  // Empty bracket means: find everything
-  // rating:-1 means sort from highest to lowest
   Template.images.helpers({
     images:function(){
       if(Session.get("userFilter")){
         // if user set a filter, change which image is sent back
-        // createdBy:Session.get("userFilter") is a Mongo filter
         return Images.find({createdBy:Session.get("userFilter")}, {sort:{createdOn:-1, rating:-1}});
         }
         else{
@@ -136,8 +122,6 @@ Router.route('/image/:_id', function() {
     }, 
     'click .js-rate-image':function(event){
       // find out which star user clicked on
-      // with the package we're using, we need to access event.currentTarget
-      // instead of event.target to get access to the db
       var rating = $(event.currentTarget).data("userrating");
       console.log("My rating is: "+rating);
       // find out which image is being rated
@@ -145,7 +129,6 @@ Router.route('/image/:_id', function() {
       console.log("The image ID is: "+image_id);
 
       // pass the rating to the db and store it
-      // the db function .update takes 2 arguments
       Images.update({_id:image_id}, {$set: {rating:rating}});
     }, 
     'click .js-show-image-form':function(event){
