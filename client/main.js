@@ -143,7 +143,7 @@ Router.route('/image/:_id', function() {
       Session.set('userFilter', undefined);
     }
    });
-
+  
   Template.image_add_form.events({
     'submit .js-add-image':function(event){
       var img_src, img_alt;
@@ -162,7 +162,7 @@ Router.route('/image/:_id', function() {
         });
       }
       // dismiss the modal
-       $("#image_add_form").modal('show');
+       $("#image_add_form").modal('hide');
       return false;
     }
   });
